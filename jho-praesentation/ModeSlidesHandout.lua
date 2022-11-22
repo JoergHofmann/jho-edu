@@ -1,0 +1,2 @@
+slidetarget = "handout"
+modus = "slides"

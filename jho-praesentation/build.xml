@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="jhopraesentation" default="main">
+
+	<target name="main" unless="done">
+		<echo message="Jetzt geht's los." />
+		<copy todir="${user.home}/.local/lib/upp">
+			<fileset dir="." includes="*.lua" />
+		</copy>
+		<property name="done" value="done" />
+	</target>
+    
+ </project>
