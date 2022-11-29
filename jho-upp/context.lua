@@ -14,8 +14,6 @@ copy = "\\copyright"
 ldots = "\\ldots"
 br = "\\crlf"
 
-EUR = "$\\,€$"
-
 times = "\\times"
 -- **}
 
@@ -44,6 +42,12 @@ tSpace = '\\bTD \\eTD'
 
 --  Funktionen ===================================================================================================================================================== {**
 --
+function EUR (betrag)
+    r = betrag .. "\\thinspace €"
+    return r
+end
+
+
 --  Bilanz und Konten {**
 
 function startbilanz(datum)

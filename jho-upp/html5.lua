@@ -21,8 +21,6 @@ lt = "&lt;"                                                      -- Öffnende sp
 gt = "&gt;"                                                      -- Schließende spitze Klammer ">"
 br = "<br />"
 
-EUR = "&thinsp;" .. euro
-
 times = "*"
 
 bTable = '<table>'
@@ -48,7 +46,13 @@ tSpace = ''
 -- **}
 
 --  Funktionen ===================================================================================================================================================== {**
---
+function EUR (betrag)
+    r = betrag .. "&thinsp;&euro;"
+    return r
+end
+
+
+
 --  Bilanz und Konten {**
 
 function startbilanz(datum)
