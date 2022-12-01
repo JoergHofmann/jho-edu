@@ -467,17 +467,26 @@ end
 --
 -- **}
 
--- Testbereich für Funktionen --{**
 
--- ZUSAMMEN ==================================================================================================== {**
--- Trennung verhindern
-function zusammen (text)
-    if (zielformat=="context") then
-	text = "\\unhyphenated{" .. text .. "}"
-    end
-    return text
-end
+YamlData = LoadYaml('projekt.yaml')
 
--- **}
+Autor = {}
+Autor['nachname'] = YamlData.autor.nachname
+Autor['vorname'] = YamlData.autor.vorname
+Autor['strasse'] = YamlData.autor.strasse
+Autor['plz'] = YamlData.autor.plz
+Autor['ort'] = YamlData.autor.ort
+Autor['tel'] = YamlData.autor.tel
+Autor['mobil'] = YamlData.autor.mobil
+Autor['fax'] = YamlData.autor.fax
+Autor['mail'] = YamlData.autor.mail
+Autor['name'] = YamlData.autor.vorname .. " " .. YamlData.autor.nachname
 
--- **}
+
+Projekt = {} 
+Projekt['lang'] = YamlData.projekt.lang
+Projekt['title'] = YamlData.projekt.title
+Projekt['subtitle'] = YamlData.projekt.subtitle
+Projekt['pagetitle'] = YamlData.projekt.pagetitle
+Projekt['shorttitle'] = YamlData.projekt.shorttitle
+Projekt['cover'] = YamlData.projekt.cover
