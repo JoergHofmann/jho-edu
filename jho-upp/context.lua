@@ -23,17 +23,17 @@ bTable = '\\bTABLE\n'
 
 eTable = '\\eTABLE\n\n'
 
-eTr = '\\eTR'
+eTr = '\\eTR\n'
 
-bTr = '\\bTR'
+bTr = '\\bTR\n'
 
 bTd = '\\bTD '
 
-eTd = '\\eTD'
+eTd = '\\eTD\n'
 
 bTh = '\\bTH '
 
-eTh = '\\eTH'
+eTh = '\\eTH\n'
 
 tSpace = '\\bTD \\eTD'
 

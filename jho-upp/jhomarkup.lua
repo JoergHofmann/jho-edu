@@ -1,13 +1,18 @@
-	
---  Konstanten ===================================================================================================================================================== {**
+-- Benötigte Bibliotheken und Module aktivieren ==================================================================== {**
+
+lyaml   = require "lyaml"
+lustache = require "lustache"
+-- **}
+
+--  Konstanten ====================================================================================================== {**
 home = os.getenv("HOME")
 
 --**}
 
--- Variable ======================================================================================================================================================== {**
+-- Variable ========================================================================================================= {**
 
 
--- Variable für Jahr, Monat, Tag definieren ====================================================================================== {**
+-- Variable für Jahr, Monat, Tag definieren ======================================================= {**
 --
 
 heute = os.date('*t')
@@ -100,7 +105,7 @@ Monat[12] = {
 
  -- **}
 
--- Projektinformationen ====================================================================================== {**
+-- Projektinformationen =========================================================================== {**
 --
 ProjectId = ""
 
@@ -116,109 +121,60 @@ AufgabenTyp = "" -- BELEG oder TEXT
 
 -- Dokument-Info ==================================================================================================== {**
 
-AutorNachname = "Hofmann"
-AutorVorname = "Jörg"
-AutorStrasse = "Am Schloßpark 78"
-AutorPLZ = "65203"
-AutorOrt = "Wiesbaden"
-AutorTel = "+49 611 507411"
-AutorMobil = "+49 176 27810343"
-AutorMail = "joerg.hofmann@jho-home.de"
-
-function SetAutorNachname(nachname) --{**
-   AutorNachname = nachname
-end
--- **}
-
-function SetAutorVorname(vorname) --{**
-   AutorVorname = vorname
-end
--- **}
-
-function SetAutorStrasse(strasse) --{**
-   AutorStrasse = strasse 
-end
--- **}
-
-function SetAutorPLZ(plz) --{**
-   AutorPLZ = plz
-end
--- **}
-
-function SetAutorOrt(ort) --{**
-   AutorOrt = ort
-end
--- **}
-
-function SetAutorTel(tel) --{**
-   AutorTel = tel
-end
--- **}
-
-function SetAutorFax(fax) --{**
-   AutorFax = fax
-end
--- **}
-
-function SetAutorMobil(mobil) --{**
-   AutorMobil = mobil
-end
--- **}
-
-function SetAutorMail(mail) --{**
-   AutorMail = mail
-end
--- **}
 
 function MainInit () --{**
+
+YamlData = LoadYaml('projekt')
+
+Autor = {}
+Autor['nachname'] = YamlData.autor.nachname
+Autor['vorname'] = YamlData.autor.vorname
+Autor['strasse'] = YamlData.autor.strasse
+Autor['plz'] = YamlData.autor.plz
+Autor['ort'] = YamlData.autor.ort
+Autor['tel'] = YamlData.autor.tel
+Autor['mobil'] = YamlData.autor.mobil
+Autor['fax'] = YamlData.autor.fax
+Autor['mail'] = YamlData.autor.mail
+Autor['name'] = YamlData.autor.vorname .. " " .. YamlData.autor.nachname
+
+
+Projekt = {} 
+Projekt['lang'] = YamlData.projekt.lang
+Projekt['title'] = YamlData.projekt.title
+Projekt['subtitle'] = YamlData.projekt.subtitle
+Projekt['pagetitle'] = YamlData.projekt.pagetitle
+Projekt['shorttitle'] = YamlData.projekt.shorttitle
+Projekt['cover'] = YamlData.projekt.cover
 	
-        local lustache = require "lustache"
-	local lyaml   = require "lyaml"
-	local YamlStr = ""
-	for line in io.lines("start.yaml") do 
-		YamlStr = YamlStr .. line .. "\n"
-	end
-
-
-	local vorlage_aufgaben = [[
-{{#aufgaben}}
-<tr>
-    <td><a href="{{ort}}/index.html">{{firma}}</a></td>
-    <td>{{tags}}</td>
-</tr>
-{{/aufgaben}}
-]]
-	InputData = lyaml.load(YamlStr)
-
-	AutorNachname = InputData.autor.nachname
-	AutorVorname = InputData.autor.vorname
-	AutorStrasse = InputData.autor.strasse
-	AutorPLZ = InputData.autor.plz
-	AutorOrt = InputData.autor.ort
-	AutorTel = InputData.autor.tel
-	AutorFax = InputData.autor.fax
-	AutorMobil = InputData.autor.mobil
-	AutorMail = InputData.autor.mail
-
-	DieseFirmaName = InputData.diese_firma.name
-	DieseFirmaStrasse = InputData.diese_firma.strasse
-	DieseFirmaPLZ = InputData.diese_firma.plz
-	DieseFirmaOrt = InputData.diese_firma.ort
-	DieseFirmaTel = InputData.diese_firma.tel
-	DieseFirmaFax = InputData.diese_firma.fax
-	DieseFirmaMobil = InputData.diese_firma.mobil
-	DieseFirmaMail = InputData.diese_firma.mail
-	DieseFirmaWWW = InputData.diese_firma.www
-	DieseFirmaLogo = InputData.diese_firma.logo
-
-	AufgabenListe = lustache:render(vorlage_aufgaben, InputData)
-
+DieseFirma = {}
+DieseFirma['name1'] = YamlData.DieseFirma.name1
+DieseFirma['name2'] = YamlData.DieseFirma.name2
+DieseFirma['strasse'] = YamlData.DieseFirma.strasse
+DieseFirma['plz'] = YamlData.DieseFirma.plz
+DieseFirma['ort'] = YamlData.DieseFirma.ort
+DieseFirma['tel'] = YamlData.DieseFirma.tel
+DieseFirma['fax'] = YamlData.DieseFirma.fax
+DieseFirma['mobil'] = YamlData.DieseFirma.mobil
+DieseFirma['mail'] = YamlData.DieseFirma.mail
+DieseFirma['www'] = YamlData.DieseFirma.www
+DieseFirma['bank1name'] = YamlData.DieseFirma.bank1name
+DieseFirma['bank1iban'] = YamlData.DieseFirma.bank1iban
+DieseFirma['bank1bic'] = YamlData.DieseFirma.bank1bic
+DieseFirma['bank2name'] = YamlData.DieseFirma.bank2name
+DieseFirma['bank2iban'] = YamlData.DieseFirma.bank2iban
+DieseFirma['bank2bic'] = YamlData.DieseFirma.bank2bic
+DieseFirma['ustid'] = YamlData.DieseFirma.ustid
+DieseFirma['ustbesteuerung'] = YamlData.DieseFirma.ustbesteuerung
+DieseFirma['kontenrahmen'] = YamlData.DieseFirma.kontenrahmen
+DieseFirma['wirtschaftsjahr'] = YamlData.DieseFirma.wirtschaftsjahr
+DieseFirma['buchungsperioden'] = YamlData.DieseFirma.buchungsperioden
+DieseFirma['gewinnermittlung'] = YamlData.DieseFirma.gewinnermittlung
     end
 -- **}
 
 function AufgabeInit () --{**
 	
-	local lyaml   = require "lyaml"
 	local YamlStr = ""
 	for line in io.lines("aufgabe.yaml") do 
 		YamlStr = YamlStr .. line .. "\n"
@@ -315,7 +271,7 @@ end
 
 -- **}
 
--- pdf ==================================================================================================== {**
+-- ifpdf ==================================================================================================== {**
 -- wird ausgeführt wenn zielformat = pdf
 
 function ifpdf (content)
@@ -334,9 +290,6 @@ end
 --
 function mustache (datei, vorlage)
 	
-	local lyaml   = require "lyaml"
-	local lustache = require "lustache"
-
 	local YamlStr = ""
 	for line in io.lines(datei) do 
 		YamlStr = YamlStr .. line .. "\n"
@@ -353,11 +306,9 @@ end
 -- Liest eine Yaml-Datei ein und bereitet sie auf.
 --
 function LoadYaml (datei)
-	
-	local lyaml   = require "lyaml"
 
 	local YamlStr = ""
-	for line in io.lines(datei) do 
+	for line in io.lines(datei .. '.yaml') do 
 		YamlStr = YamlStr .. line .. "\n"
 	end
 
@@ -367,6 +318,212 @@ function LoadYaml (datei)
 end
 -- **}
 
+-- InventurListe ======================================================================== {**
+-- 
+-- Vorlage um eine Inventurliste zu erstellen.
+--
+
+function InventurListe (datei)
+    
+    local out = ""
+
+    InventurListeTeX = [[
+\bTABLE
+\tfxx
+\setupTABLE[r][1][topframe=on,bottomframe=on]
+\setupTABLE[c][2,3,4][align=flushright]
+\setupTABLE[c][3,4][width=8em]
+\bTR\bTH Bezeichung\eTH\bTH Menge\eTH\bTH Wert\eTH\bTH Gesamt\eTH\eTR
+{{#inventar}}
+\bTR\bTD {{Bezeichnung}}\eTD\bTD {{Menge}}\eTD\bTD {{Wert}}\eTD\bTD {{Gesamt}}\eTD\eTR
+{{/inventar}}
+\eTABLE
+]]
+
+    InventurListeHTML = [[
+<section class="invListe">
+<table>
+	<tr>
+		<th>Bezeichung</th>
+		<th>Menge</th>
+		<th>Wert</th>
+		<th>Gesamt</th>
+	</tr>
+{{#inventar}}
+	<tr>
+		<td>{{Bezeichnung}}</td>
+		<td>{{Menge}}</td>
+		<td>{{Wert}}</td>
+		<td>{{Gesamt}}</td>
+	</tr>
+{{/inventar}}
+</table>
+</section>
+]]
+
+    SummeAV = 0
+    SummeUV = 0
+    SummeSchulden = 0
+    ZahlElemente = 9
+
+    InputData = LoadYaml(datei)
+    
+    YamlOutputStr = "---\ninventar:\n"
+    
+    local z = #InputData.inventar.Vermoegen.Anlagevermoegen
+    for i = 1, z, 1 do
+        InputData.inventar.Vermoegen.Anlagevermoegen[i].Gesamt = InputData.inventar.Vermoegen.Anlagevermoegen[i].Menge * InputData.inventar.Vermoegen.Anlagevermoegen[i].Wert
+        YamlOutputStr = YamlOutputStr .. '    -\n'
+        YamlOutputStr = YamlOutputStr .. '      Bezeichnung: "' .. InputData.inventar.Vermoegen.Anlagevermoegen[i].Bezeichnung .. '"\n'
+        YamlOutputStr = YamlOutputStr .. '      Menge: ' .. InputData.inventar.Vermoegen.Anlagevermoegen[i].Menge .. '\n'
+        YamlOutputStr = YamlOutputStr .. '      Wert: ' .. tausender(InputData.inventar.Vermoegen.Anlagevermoegen[i].Wert,2) .. '\n'
+        YamlOutputStr = YamlOutputStr .. '      Gesamt: ' .. tausender(InputData.inventar.Vermoegen.Anlagevermoegen[i].Gesamt,2) .. '\n'
+    end
+    ZahlElemente = ZahlElemente + z
+    local z = #InputData.inventar.Vermoegen.Umlaufvermoegen
+    for i = 1, z, 1 do
+        InputData.inventar.Vermoegen.Umlaufvermoegen[i].Gesamt = InputData.inventar.Vermoegen.Umlaufvermoegen[i].Menge * InputData.inventar.Vermoegen.Umlaufvermoegen[i].Wert
+        YamlOutputStr = YamlOutputStr .. '    -\n'
+        YamlOutputStr = YamlOutputStr .. '      Bezeichnung: "' .. InputData.inventar.Vermoegen.Umlaufvermoegen[i].Bezeichnung .. '"\n'
+        YamlOutputStr = YamlOutputStr .. '      Menge: ' .. InputData.inventar.Vermoegen.Umlaufvermoegen[i].Menge .. '\n'
+        YamlOutputStr = YamlOutputStr .. '      Wert: ' .. tausender(InputData.inventar.Vermoegen.Umlaufvermoegen[i].Wert,2) .. '\n'
+        YamlOutputStr = YamlOutputStr .. '      Gesamt: ' .. tausender(InputData.inventar.Vermoegen.Umlaufvermoegen[i].Gesamt,2) .. '\n'
+    end
+    ZahlElemente = ZahlElemente + z
+    local z = #InputData.inventar.Schulden
+    for i = 1, z, 1 do
+        YamlOutputStr = YamlOutputStr .. '    -\n'      
+        YamlOutputStr = YamlOutputStr .. '      Bezeichnung: "' .. InputData.inventar.Schulden[i].Bezeichnung .. '"\n'
+        YamlOutputStr = YamlOutputStr .. '      Menge: ' .. InputData.inventar.Schulden[i].Menge .. '\n'
+        YamlOutputStr = YamlOutputStr .. '      Wert: ' .. tausender(InputData.inventar.Schulden[i].Wert,2) .. '\n'
+        YamlOutputStr = YamlOutputStr .. '      Gesamt: ' .. tausender(InputData.inventar.Schulden[i].Wert,2) .. '\n'
+    end
+    OutputData = lyaml.load(YamlOutputStr)
+    mischen(OutputData.inventar,1)
+    if (zielformat == "context") then
+	vorlage = InventurListeTeX
+    elseif (zielformat == "html5") then
+	vorlage = InventurListeHTML
+    end
+
+    out = lustache:render(vorlage, OutputData)
+
+    return out
+end
+-- **}
+
+-- InventurStaffel ======================================================================== {**
+-- 
+-- Erstellt Inventar in Staffelform aus yaml-Datei.
+
+function InventurStaffel (datei)
+    
+    local out = ""
+
+    InventurListeTeX = [[
+\bTABLE
+\tfxx
+\setupTABLE[r][1][topframe=on,bottomframe=on]
+\setupTABLE[c][2,3,4][align=flushright]
+\setupTABLE[c][3,4][width=8em]
+\bTR\bTH Bezeichung\eTH\bTH Menge\eTH\bTH Wert\eTH\bTH Gesamt\eTH\eTR
+{{#inventar}}
+\bTR\bTD {{Bezeichnung}}\eTD\bTD {{Menge}}\eTD\bTD {{Wert}}\eTD\bTD {{Gesamt}}\eTD\eTR
+{{/inventar}}
+\eTABLE
+]]
+
+    InventurListeHTML = [[
+<section class="invListe">
+<table>
+	<tr>
+		<th>Bezeichung</th>
+		<th>Menge</th>
+		<th>Wert</th>
+		<th>Gesamt</th>
+	</tr>
+{{#inventar}}
+	<tr>
+		<td>{{Bezeichnung}}</td>
+		<td>{{Menge}}</td>
+		<td>{{Wert}}</td>
+		<td>{{Gesamt}}</td>
+	</tr>
+{{/inventar}}
+</table>
+</section>
+]]
+
+    SummeAV = 0
+    SummeUV = 0
+    SummeSchulden = 0
+    ZahlElemente = 9
+
+    InputData = LoadYaml(datei)
+
+    out = "**Inventar zum " .. InputData.tag .. ". " .. Monat[InputData.monat].MMMM .. " " .. Vorjahr .. "**$(br)$(br)$(br)\n\n"
+    out = out .. "|Bezeichnung                                        |Menge  |Wert              |Gesamt            |Summen            |\n"
+    out = out .. "|:--------------------------------------------------|------:|-----------------:|-----------------:|-----------------:|\n"
+    out = out .. "|Vermögen                                           |       |                  |                  |                  |\n"
+    out = out .. "|Anlagevermögen                                     |       |                  |                  |                  |\n"
+
+    
+    local z = #InputData.inventar.Vermoegen.Anlagevermoegen
+    for i = 1, z-1, 1 do
+        local g = InputData.inventar.Vermoegen.Anlagevermoegen[i].Menge * InputData.inventar.Vermoegen.Anlagevermoegen[i].Wert
+        SummeAV = SummeAV + g
+	out = out .. "|" .. InputData.inventar.Vermoegen.Anlagevermoegen[i].Bezeichnung
+	out = out .. "|" .. InputData.inventar.Vermoegen.Anlagevermoegen[i].Menge
+	out = out .. "|" .. tausender(InputData.inventar.Vermoegen.Anlagevermoegen[i].Wert,2)
+	out = out .. "|" .. tausender(g,2) .. "| |\n"
+    end
+    local g = InputData.inventar.Vermoegen.Anlagevermoegen[z].Menge * InputData.inventar.Vermoegen.Anlagevermoegen[z].Wert
+    SummeAV = SummeAV + g
+    out = out .. "|" .. InputData.inventar.Vermoegen.Anlagevermoegen[z].Bezeichnung
+    out = out .. "|" .. InputData.inventar.Vermoegen.Anlagevermoegen[z].Menge
+    out = out .. "|" .. tausender(InputData.inventar.Vermoegen.Anlagevermoegen[z].Wert,2)
+    out = out .. "|" .. tausender(g,2)
+    out = out .. "|" .. tausender(SummeAV,2) .. "|\n"
+    out = out .. "|                |   |                                   |                  |                  |\n"
+    out = out .. "|Umlaufvermögen       |   |                              |                  |                  |\n"
+    
+    local z = #InputData.inventar.Vermoegen.Umlaufvermoegen
+    for i = 1, z-1, 1 do
+        local g = InputData.inventar.Vermoegen.Umlaufvermoegen[i].Menge * InputData.inventar.Vermoegen.Umlaufvermoegen[i].Wert
+        SummeUV = SummeUV + g
+	out = out .. "|" .. InputData.inventar.Vermoegen.Umlaufvermoegen[i].Bezeichnung
+	out = out .. "|" .. InputData.inventar.Vermoegen.Umlaufvermoegen[i].Menge
+	out = out .. "|" .. tausender(InputData.inventar.Vermoegen.Umlaufvermoegen[i].Wert,2)
+	out = out .. "|" .. tausender(g, 2) .. "|   |\n"
+    end
+    local g = InputData.inventar.Vermoegen.Umlaufvermoegen[z].Menge * InputData.inventar.Vermoegen.Umlaufvermoegen[z].Wert
+    SummeUV = SummeUV + g
+    out = out .. "|" .. InputData.inventar.Vermoegen.Umlaufvermoegen[z].Bezeichnung
+    out = out .. "|" .. InputData.inventar.Vermoegen.Umlaufvermoegen[z].Menge
+    out = out .. "|" .. tausender(InputData.inventar.Vermoegen.Umlaufvermoegen[z].Wert,2)
+    out = out .. "|" .. tausender(g,2)
+    out = out .. "|" .. tausender(SummeUV,2) .. "|\n"
+    out = out .. "|   |   |   |   |   |\n"
+    local s = SummeAV + SummeUV
+    out = out .. "|Summe Vermögen |   |   |   |" .. tausender(s,2) .. "|\n"
+    out = out .. "|   |   |   |\n"
+    out = out .. "| Schulden |   |   |\n"
+    local z = #InputData.inventar.Schulden
+    for i = 1, z-1, 1 do
+	SummeSchulden = SummeSchulden + InputData.inventar.Schulden[i].Wert
+	out = out .. "|" .. InputData.inventar.Schulden[i].Bezeichnung .. "|   |   "
+	out = out .. "|" .. tausender(InputData.inventar.Schulden[i].Wert,2) .. "|   |\n"
+    end
+    SummeSchulden = SummeSchulden + InputData.inventar.Schulden[z].Wert
+    out = out .. "|" .. InputData.inventar.Schulden[z].Bezeichnung .. "|   |   "
+    out = out .. "|" .. tausender(InputData.inventar.Schulden[z].Wert,2)
+    out = out .. "|" .. tausender(SummeSchulden,2) .. "|\n"
+    out = out .. "|   |   |   |\n"
+    local r = s - SummeSchulden
+    out = out .. "|Reinvermögen |   |   |   |" .. tausender(r, 2) .. "|\n\n"
+    return out
+end
+-- **}
 
 -- SETMUSTACHETEMPLATE ==================================================================================================== {**
 -- Wählt passendes Template aus. Template wird in der Aufgabe vorgegeben.
@@ -467,26 +624,6 @@ end
 --
 -- **}
 
-
-YamlData = LoadYaml('projekt.yaml')
-
-Autor = {}
-Autor['nachname'] = YamlData.autor.nachname
-Autor['vorname'] = YamlData.autor.vorname
-Autor['strasse'] = YamlData.autor.strasse
-Autor['plz'] = YamlData.autor.plz
-Autor['ort'] = YamlData.autor.ort
-Autor['tel'] = YamlData.autor.tel
-Autor['mobil'] = YamlData.autor.mobil
-Autor['fax'] = YamlData.autor.fax
-Autor['mail'] = YamlData.autor.mail
-Autor['name'] = YamlData.autor.vorname .. " " .. YamlData.autor.nachname
+MainInit()
 
 
-Projekt = {} 
-Projekt['lang'] = YamlData.projekt.lang
-Projekt['title'] = YamlData.projekt.title
-Projekt['subtitle'] = YamlData.projekt.subtitle
-Projekt['pagetitle'] = YamlData.projekt.pagetitle
-Projekt['shorttitle'] = YamlData.projekt.shorttitle
-Projekt['cover'] = YamlData.projekt.cover
