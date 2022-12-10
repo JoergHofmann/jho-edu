@@ -257,10 +257,10 @@ function SetTarget (z)
 end
 -- **}
 
--- www ==================================================================================================== {**
+-- ifwww ==================================================================================================== {**
 -- wird ausgeführt wenn zielformat = html
 
-function www (content)
+function ifwww (content)
 
 	if (zielformat == "html5") then
 		return content
@@ -300,7 +300,6 @@ function mustache (datei, vorlage)
 	return ausgabe
 end
 -- **}
-
 
 -- LoadYaml ========================================================================================================={**
 -- Liest eine Yaml-Datei ein und bereitet sie auf.
@@ -420,48 +419,13 @@ function InventurStaffel (datei)
     
     local out = ""
 
-    InventurListeTeX = [[
-\bTABLE
-\tfxx
-\setupTABLE[r][1][topframe=on,bottomframe=on]
-\setupTABLE[c][2,3,4][align=flushright]
-\setupTABLE[c][3,4][width=8em]
-\bTR\bTH Bezeichung\eTH\bTH Menge\eTH\bTH Wert\eTH\bTH Gesamt\eTH\eTR
-{{#inventar}}
-\bTR\bTD {{Bezeichnung}}\eTD\bTD {{Menge}}\eTD\bTD {{Wert}}\eTD\bTD {{Gesamt}}\eTD\eTR
-{{/inventar}}
-\eTABLE
-]]
-
-    InventurListeHTML = [[
-<section class="invListe">
-<table>
-	<tr>
-		<th>Bezeichung</th>
-		<th>Menge</th>
-		<th>Wert</th>
-		<th>Gesamt</th>
-	</tr>
-{{#inventar}}
-	<tr>
-		<td>{{Bezeichnung}}</td>
-		<td>{{Menge}}</td>
-		<td>{{Wert}}</td>
-		<td>{{Gesamt}}</td>
-	</tr>
-{{/inventar}}
-</table>
-</section>
-]]
-
     SummeAV = 0
     SummeUV = 0
     SummeSchulden = 0
-    ZahlElemente = 9
 
     InputData = LoadYaml(datei)
 
-    out = "**Inventar zum " .. InputData.tag .. ". " .. Monat[InputData.monat].MMMM .. " " .. Vorjahr .. "**$(br)$(br)$(br)\n\n"
+    out = "**Inventar zum " .. InputData.tag .. ". " .. Monat[InputData.monat].MMMM .. " " .. Vorjahr .. "**$(br)$(br)\n\n"
     out = out .. "|Bezeichnung                                        |Menge  |Wert              |Gesamt            |Summen            |\n"
     out = out .. "|:--------------------------------------------------|------:|-----------------:|-----------------:|-----------------:|\n"
     out = out .. "|Vermögen                                           |       |                  |                  |                  |\n"
