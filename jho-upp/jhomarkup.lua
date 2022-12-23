@@ -7,6 +7,18 @@ lustache = require "lustache"
 --  Konstanten ====================================================================================================== {**
 home = os.getenv("HOME")
 
+Autor = {}
+Autor['nachname'] = 'Hofmann'
+Autor['vorname'] = 'Jörg'
+Autor['strasse'] = 'Am Schloßpark 78'
+Autor['plz'] = '65203'
+Autor['ort'] = 'Wiesbaden'
+Autor['tel'] = '+49 611 507411'
+Autor['mobil'] = '+49 176 27810343'
+Autor['fax'] = '+49 611 94939032'
+Autor['mail'] = 'joerg.hofmann@jho-home.de'
+Autor['name'] = Autor['vorname'] .. " " .. Autor['nachname']
+Autor['logo'] = ''
 --**}
 
 -- Variable ========================================================================================================= {**
@@ -126,18 +138,22 @@ function MainInit () --{**
 
 YamlData = LoadYaml('projekt')
 
-Autor = {}
-Autor['nachname'] = YamlData.autor.nachname
-Autor['vorname'] = YamlData.autor.vorname
-Autor['strasse'] = YamlData.autor.strasse
-Autor['plz'] = YamlData.autor.plz
-Autor['ort'] = YamlData.autor.ort
-Autor['tel'] = YamlData.autor.tel
-Autor['mobil'] = YamlData.autor.mobil
-Autor['fax'] = YamlData.autor.fax
-Autor['mail'] = YamlData.autor.mail
-Autor['name'] = YamlData.autor.vorname .. " " .. YamlData.autor.nachname
-
+-- Prüfen ob anderer Autor
+--
+if not YamlData.autor then
+    Autor = {}
+    Autor['nachname'] = YamlData.autor.nachname
+    Autor['vorname'] = YamlData.autor.vorname
+    Autor['strasse'] = YamlData.autor.strasse
+    Autor['plz'] = YamlData.autor.plz
+    Autor['ort'] = YamlData.autor.ort
+    Autor['tel'] = YamlData.autor.tel
+    Autor['mobil'] = YamlData.autor.mobil
+    Autor['fax'] = YamlData.autor.fax
+    Autor['mail'] = YamlData.autor.mail
+    Autor['logo'] = YamlData.autor.logo
+    Autor['name'] = YamlData.autor.vorname .. " " .. YamlData.autor.nachname
+end
 
 Projekt = {} 
 Projekt['lang'] = YamlData.projekt.lang

@@ -18,7 +18,13 @@
 
 	<target name="upp4moodle" unless="done">
 		<exec executable="upp" output="0_TMP/${ant.project.name}.md" logError="true">
-			<arg line="-l html5.lua -l moodle.lua ${ant.project.name}.md" />
+			<arg line="-l moodle.lua ${ant.project.name}.md" />
+		</exec>
+	</target>
+
+	<target name="upp4hugo" unless="done">
+		<exec executable="upp" output="0_TMP/${ant.project.name}.md" logError="true">
+			<arg line="-l hugo.lua ${ant.project.name}.md" />
 		</exec>
 	</target>
 

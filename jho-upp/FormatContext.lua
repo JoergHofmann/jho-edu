@@ -1,29 +1,59 @@
-require "jhomarkup"
-
 --  Konstanten ===================================================================================================================================================== {**
-zielformat = "latex"
 
+-- Sonderzeichen {**
+nbsp = "\\ "                                              -- Leerzeichen ohne Umbruch
+ensp = "\\ "                                              -- normales Leerzeichen
+emsp = "\\quad"
+thinsp = "\\thinspace "                                   -- Schmales Leerzeichen
+quot ="&quot;"
+euro = "€"
+copy = "\\copyright"
+ldots = "\\ldots"
 br = "\\crlf"
 
-eur = "\\,€"
-
-nbsp = "~"
-
+times = "\\times"
 -- **}
 
 
+-- Befehle {**
+bTable = '\\bTABLE\n'
+
+eTable = '\\eTABLE\n\n'
+
+eTr = '\\eTR\n'
+
+bTr = '\\bTR\n'
+
+bTd = '\\bTD '
+
+eTd = '\\eTD\n'
+
+bTh = '\\bTH '
+
+eTh = '\\eTH\n'
+
+tSpace = '\\bTD \\eTD'
+
+-- **}
+--**}
+
 --  Funktionen ===================================================================================================================================================== {**
 --
+function EUR (betrag)
+    r = betrag .. "\\thinspace €"
+    return r
+end
+
+
 --  Bilanz und Konten {**
 
-function startbilanz(datum, summe)
+function startbilanz(datum)
    ergebnis = "\\midaligned\\bgroup\n"
-   ergebnis = ergebnis .. "\\define\\summe{" .. summe .. "}\n"
    ergebnis = ergebnis .. "\\setupTABLE[background=color, frame=off]\n"
-   ergebnis = ergebnis .. "\\setupTABLE[c][each][width=0.09\\textwidth]\n"
+   ergebnis = ergebnis .. "\\setupTABLE[c][each][width=0.1\\textwidth]\n"
    ergebnis = ergebnis .. "\\setupTABLE[c][6][width=0.25pt]\n"
    ergebnis = ergebnis .. "\\setupTABLE[r][1][height=0cm, frame=off]"
-   ergebnis = ergebnis .. "\\bTABLE\n\\tfx \n"
+   ergebnis = ergebnis .. "\\bTABLE\n\\tfxx \n"
    ergebnis = ergebnis .. "\\bTR\\bTD\\eTD\\bTD\\eTD\\bTD\\eTD\\bTD\\eTD\\bTD\\eTD\\bTD\\eTD\\bTD\\eTD\\bTD\\eTD\\bTD\\eTD\\bTD\\eTD\\bTD\\eTD\\eTR\n"
    ergebnis = ergebnis .. "\\bTR \\bTD[nc=11, align=middle]Bilanz\\eTD\\eTR\n"
    ergebnis = ergebnis .. "\\bTR[bottomframe=on]\\bTD[nc=3,align=flushleft] Aktiva\\eTD\\bTD[nc=5, align=middle]zum "
@@ -32,12 +62,12 @@ function startbilanz(datum, summe)
    return ergebnis
 end
 
-function stopbilanz()
+function stopbilanz(summe)
    ergebnis = "\\bTR[topframe=on] \\bTD\\eTD\\bTD\\eTD\\bTD\\eTD"
-   ergebnis = ergebnis .. "\\bTD[nc=2, align=flushright]{\\underbar\\underbar \\summe}\\eTD"
+   ergebnis = ergebnis .. "\\bTD[nc=2, align=flushright]\\underbars{\\underbars{" .. summe .. "}}\\eTD"
    ergebnis = ergebnis.. "\\bTD[backgroundcolor=black]\\eTD\\bTD\\eTD\\bTD\\eTD\\bTD\\eTD"
-   ergebnis = ergebnis .. "\\bTD[nc=2, align=flushright]{\\underbar\\underbar\\summe}"
-   ergebnis = ergebnis .. "\\eTD\\eTR\\eTABLE\n\\egroup"
+   ergebnis = ergebnis .. "\\bTD[nc=2, align=flushright]\\underbars{\\underbars{" .. summe .. "}}\\eTD"
+   ergebnis = ergebnis .. "\\eTR\\eTABLE\n\\egroup"
    return ergebnis
 end
 
@@ -67,14 +97,29 @@ function FK()
 end
 
 function ASleer()
-   ergebnis = "\\bTR \\bTD[nc=5] \\eTD"
+   ergebnis = "\\bTR\\bTD[nc=5]\\  \\eTD"
    return ergebnis
 end
 
 function PHleer()
-   ergebnis = "\\bTD[nc=5] \\eTD\\eTR"
+   ergebnis = "\\bTD[nc=5]\\ \\eTD\\eTR"
    return ergebnis
 end
+
+function AStext(text)
+   ergebnis = "\\bTR \\bTD[nc=5] "
+   ergebnis = ergebnis .. text
+   ergebnis = ergebnis .. "\\eTD"
+   return ergebnis
+end
+
+function PHtext(text)
+   ergebnis = "\\bTD[nc=5] "
+   ergebnis = ergebnis .. text
+   ergebnis = ergebnis .. "\\eTD\\eTR"
+   return ergebnis
+end
+
 
 function aktiva(text, betrag)
    ergebnis = "\\bTR \\bTD[nc=3] "
@@ -159,5 +204,9 @@ function bs(skto, hkto, betrag)
    return ergebnis
 end
 
+function eur (betrag)
+	return "$" .. betrag .. "\\,€$"
+end
 -- **}
+
 -- **}
