@@ -47,7 +47,9 @@ function EUR (betrag)
     return r
 end
 
-
+function MathMl (content)
+    return content
+end
 
 --  Bilanz und Konten {**
 

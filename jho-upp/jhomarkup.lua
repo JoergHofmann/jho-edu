@@ -10,6 +10,7 @@ home = os.getenv("HOME")
 Autor = {}
 Autor['nachname'] = 'Hofmann'
 Autor['vorname'] = 'Jörg'
+Autor['nickname'] = 'Josh'
 Autor['strasse'] = 'Am Schloßpark 78'
 Autor['plz'] = '65203'
 Autor['ort'] = 'Wiesbaden'
@@ -18,7 +19,9 @@ Autor['mobil'] = '+49 176 27810343'
 Autor['fax'] = '+49 611 94939032'
 Autor['mail'] = 'joerg.hofmann@jho-home.de'
 Autor['name'] = Autor['vorname'] .. " " .. Autor['nachname']
-Autor['logo'] = ''
+Autor['firma'] = "pecunia-non-olet.com"
+Autor['logo'] = 'ich-zeichnung.png'
+Autor['www'] = 'pecunia-non-olet.com'
 --**}
 
 -- Variable ========================================================================================================= {**
@@ -131,62 +134,29 @@ AufgabenTyp = "" -- BELEG oder TEXT
 
 -- Funktionen {**
 
--- Dokument-Info ==================================================================================================== {**
-
-
 function MainInit () --{**
 
-YamlData = LoadYaml('projekt')
+    Projekt = LoadYaml('projekt')
 
 -- Prüfen ob anderer Autor
 --
-if not YamlData.autor then
+if Projekt.autor then
     Autor = {}
-    Autor['nachname'] = YamlData.autor.nachname
-    Autor['vorname'] = YamlData.autor.vorname
-    Autor['strasse'] = YamlData.autor.strasse
-    Autor['plz'] = YamlData.autor.plz
-    Autor['ort'] = YamlData.autor.ort
-    Autor['tel'] = YamlData.autor.tel
-    Autor['mobil'] = YamlData.autor.mobil
-    Autor['fax'] = YamlData.autor.fax
-    Autor['mail'] = YamlData.autor.mail
-    Autor['logo'] = YamlData.autor.logo
-    Autor['name'] = YamlData.autor.vorname .. " " .. YamlData.autor.nachname
+    Autor['nachname'] = Projekt.autor.nachname
+    Autor['vorname'] = Projekt.autor.vorname
+    Autor['nickname'] = Projekt.autor.nickname
+    Autor['strasse'] = Projekt.autor.strasse
+    Autor['plz'] = Projekt.autor.plz
+    Autor['ort'] = Projekt.autor.ort
+    Autor['tel'] = Projekt.autor.tel
+    Autor['mobil'] = Projekt.autor.mobil
+    Autor['fax'] = Projekt.autor.fax
+    Autor['mail'] = Projekt.autor.mail
+    Autor['logo'] = Projekt.autor.logo
+    Autor['name'] = Projekt.autor.vorname .. " " .. Projekt.autor.nachname
 end
-
-Projekt = {} 
-Projekt['lang'] = YamlData.projekt.lang
-Projekt['title'] = YamlData.projekt.title
-Projekt['subtitle'] = YamlData.projekt.subtitle
-Projekt['pagetitle'] = YamlData.projekt.pagetitle
-Projekt['shorttitle'] = YamlData.projekt.shorttitle
-Projekt['cover'] = YamlData.projekt.cover
 	
-DieseFirma = {}
-DieseFirma['name1'] = YamlData.DieseFirma.name1
-DieseFirma['name2'] = YamlData.DieseFirma.name2
-DieseFirma['strasse'] = YamlData.DieseFirma.strasse
-DieseFirma['plz'] = YamlData.DieseFirma.plz
-DieseFirma['ort'] = YamlData.DieseFirma.ort
-DieseFirma['tel'] = YamlData.DieseFirma.tel
-DieseFirma['fax'] = YamlData.DieseFirma.fax
-DieseFirma['mobil'] = YamlData.DieseFirma.mobil
-DieseFirma['mail'] = YamlData.DieseFirma.mail
-DieseFirma['www'] = YamlData.DieseFirma.www
-DieseFirma['bank1name'] = YamlData.DieseFirma.bank1name
-DieseFirma['bank1iban'] = YamlData.DieseFirma.bank1iban
-DieseFirma['bank1bic'] = YamlData.DieseFirma.bank1bic
-DieseFirma['bank2name'] = YamlData.DieseFirma.bank2name
-DieseFirma['bank2iban'] = YamlData.DieseFirma.bank2iban
-DieseFirma['bank2bic'] = YamlData.DieseFirma.bank2bic
-DieseFirma['ustid'] = YamlData.DieseFirma.ustid
-DieseFirma['ustbesteuerung'] = YamlData.DieseFirma.ustbesteuerung
-DieseFirma['kontenrahmen'] = YamlData.DieseFirma.kontenrahmen
-DieseFirma['wirtschaftsjahr'] = YamlData.DieseFirma.wirtschaftsjahr
-DieseFirma['buchungsperioden'] = YamlData.DieseFirma.buchungsperioden
-DieseFirma['gewinnermittlung'] = YamlData.DieseFirma.gewinnermittlung
-    end
+end
 -- **}
 
 function AufgabeInit () --{**
@@ -208,34 +178,6 @@ function AufgabeInit () --{**
     end
 
   -- **}
-
-	
-
--- **}
-
--- Projektinformationen ====================================================================================== {**
---
-function SetProjectId (id) --{**
-	ProjectId = id
-end
--- **}
-
-function SetProjectTitel (t) --{**
-	ProjectTitel = t
-end
--- **}
-
-function SetTypBeleg() --{**
-   AufgabenTyp = "beleg"
-end
--- **}
-
-function SetTypText() --{**
-   AufgabenTyp = "text"
-end
--- **}
-
--- **}
 
 -- Git-Funktionenen {**
 -- Funktionen um Informationen aus Git zu erhalten
@@ -288,14 +230,28 @@ end
 -- **}
 
 -- ifpdf ==================================================================================================== {**
--- wird ausgeführt wenn zielformat = pdf
+-- wird ausgeführt wenn target = pdf
 
 function ifpdf (content)
 
-	if (zielformat == "html5") then
-		return ""
-	else
+	if (target == "pdf") then
 		return content
+	else
+		return ""
+	end
+end
+
+-- **}
+
+-- ifhugo ==================================================================================================== {**
+-- wird ausgeführt wenn target = hugo
+
+function ifhugo (content)
+
+	if (target == "hugo") then
+		return content
+	else
+		return ""
 	end
 end
 

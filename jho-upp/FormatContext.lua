@@ -44,6 +44,11 @@ function EUR (betrag)
     return r
 end
 
+function MathMl (content)
+    content = "\\xmlprocessdata{}{" .. content .. "}{}"
+    return content
+end
+
 
 --  Bilanz und Konten {**
 
