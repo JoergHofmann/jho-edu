@@ -120,25 +120,18 @@ Monat[12] = {
 
  -- **}
 
--- Projektinformationen =========================================================================== {**
---
-ProjectId = ""
-
-ProjectTitel = ""
-
-AufgabenTyp = "" -- BELEG oder TEXT
-
--- **}
-
 -- **}
 
 -- Funktionen {**
 
 function MainInit () --{**
 
+    ChapterNo = 0
+    SectionNo = 0
+
     Projekt = LoadYaml('projekt')
 
--- Prüfen ob anderer Autor
+-- Prüfen ob anderer Autor {**
 --
 if Projekt.autor then
     Autor = {}
@@ -152,12 +145,34 @@ if Projekt.autor then
     Autor['mobil'] = Projekt.autor.mobil
     Autor['fax'] = Projekt.autor.fax
     Autor['mail'] = Projekt.autor.mail
-    Autor['logo'] = Projekt.autor.logo
     Autor['name'] = Projekt.autor.vorname .. " " .. Projekt.autor.nachname
+    Autor['firma'] = Projekt.autor.firma
+    Autor['logo'] = Projekt.autor.logo
+    Autor['www'] =  Projekt.autor.www
 end
+**}
+
 	
 end
 -- **}
+
+function chapter (title, shorttitle, content) --{**
+
+    if shorttitle then
+	shorttitle = title
+    end
+
+    if (target == "hugo" then
+	returnStr = '---\ntitle: "' .. title .. '"\nmenutitle: "' .. shorttitle ..'"\n'
+    returnStr = returnStr .. 'chapter: true\nweight: ' .. hugoWeight .. '\n---\n\n'
+    returnStr = returnStr .. content
+datei = io.open(".txt", "a")
+datei:write("testnachricht")
+datei:close()
+    return returnStr
+
+end
+--**}
 
 function AufgabeInit () --{**
 	
@@ -501,12 +516,9 @@ function Aufgabe (GlEbene, Titel, Datei, Yaml)
     InputData = LoadYaml(Yaml)
 
     -- Überschrift
-    for i = 1, GlEbene, 1 do
-	ReturnStr = ReturnStr .. "#"
-    end
-    ReturnStr = ReturnStr .. " Übung: " .. Titel .. "\n\n"
+    ReturnStr = ReturnStr .. GlEbene .. " Übung: " .. Titel .. "\n\n"
 
-    ReturnStr = ReturnStr .. main(GlEbene + 1) 
+    ReturnStr = ReturnStr .. main(GlEbene) 
 
     return ReturnStr
 
@@ -559,7 +571,5 @@ end
 -- **}
 --
 -- **}
-
-MainInit()
 
 

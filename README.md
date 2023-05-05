@@ -1,6 +1,10 @@
-# Ziel
+# Was ist das hier?
 
-Zusammengefaßtes Repo für alle Projekte rund um eLearning.
+Ein zusammengefaßtes Git-Repository für alle meine Projekte rund um eLearning.
+
+Mein Ziel, das vielbeschworene Single-source-publishing, Skripte als PDF oder interaktiv, 
+
+ 
 
 ## jho-upp
 
