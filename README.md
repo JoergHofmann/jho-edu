@@ -1,10 +1,30 @@
-# Was ist das hier?
+# Einleitung
+
+## Was ist das hier?
 
 Ein zusammengefaßtes Git-Repository für alle meine Projekte rund um eLearning.
 
 Mein Ziel, das vielbeschworene Single-source-publishing, Skripte als PDF oder interaktiv, 
 
  
+## Die Software
+
+* *Vim*, weil ich mir dazu zwei Bücher gekauft habe und diese Investition nicht einfach abschreiben möchte. ;-)
+
+* *upp*, ein einfacher Preprozessor, der mit Lua-Funktionen erweitert werden kann.
+
+* *pandoc*
+
+* *Apache Ant*
+
+* *ConTeXt*
+
+* *Lua*
+
+* *NodeJs*
+
+* *HUGO*
+
 
 ## jho-upp
 
@@ -20,20 +40,6 @@ Das Skript soll das Erstellen von Präsentationen mit pandoc-markdown und *revea
 * handout: Ein verkleinertes Bild der Folie mit zusatzlichen Anmerkungen.
 
 * notes: Ausdruck für den Vortragenden mit Folien und Notizen.
-
-### Die Software
-
-* *Vim*, weil ich mir dazu zwei Bücher gekauft habe und diese Investition nicht einfach abschreiben möchte. ;-)
-
-* *upp*, ein einfacher Preprozessor, der mit Lua-Funktionen erweitert werden kann.
-
-* *pandoc*
-
-* *Apache Ant*
-
-* *ConTeXt*
-
-* *Lua*
 
 ## jho-js
 
