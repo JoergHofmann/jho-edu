@@ -1,32 +1,60 @@
 <!--
-language: de
+language: $(Projekt.shortlang)
 
-author: Jörg Hofmann
+author:  $(Autor['name'])
 
-email: joerg.hofmann@pecunia-non-olet.com
+email: $(Autor['mail']) 
+mymail: [$(Autor['mail'])]($(Autor['mail'])) 
 
+title: $(Projekt.title) 
+pagetitle: $(Projekt.pagetitle) 
+subtitle: $(Projekt.subtitle)
+shorttitle: $(Projekt.shorttitle) 
+cover: $(Projekt.cover)
+date: $(Monat[heute.month].MMMM) $(heute.year)
+git: $(GetShortGITHash "")
+
+version: $(GetShortGITHash "")
 -->
 
-# Einleitung
+# @title
 
-## Wer sind Sie
+<h3>@subtitle</h3>
+
+![Titelbild](images/titelbild.png "Titelbild")
+
+$(br)
+@author$(br)
+@mymail
+
+$(br)
+@date$(br)
+Git: @git
+
+## Einleitung
+* Wer sind Sie
+* Und wer bin ich
+* Worum geht es: Die Aufgaben der Buchführung
+* Unsere Firma, die Rat-Pack-Sound-OHG
+
+### Wer sind Sie
 
 Dies ist **kein** Anfängerkurs, vielmehr soll er ihnen helfen, ihre Buchführungskenntnisse wieder aufzufrischen. Sie sollten also schon Buchführungskenntnisse haben. Hier werden einmal die Grundlagen **kurz** wiederholt und die wichtigsten deutschen Vorschriften erklärt. Hilfe zur einzelnen Geschäftsfällen, wie Einkauf, Verkauf, Nachlässe, etc., finden sie in der [Kontierungshilfe](http://pecunia-non-olet.com).
 
 
-## Und wer bin ich
+### Und wer bin ich
 
 Mein Name ist Jörg Hofmann und ich bin seit 2003 Dozent für betriebswirtschaftliche Inhalte in der beruflichen Weiterbildung. Vorher war ich unter anderem im Steuerbüro und als Buchhalter im Betrieb tätig, daher liegt mein Schwerpunkt natürlich bei der Buchhaltung und der Kosten- und Leistungsrechnung.
 
 Zum Schluß noch zwei Hinweise in eigener Sache:
 
-1. In diesem Dokument finden sie viele Links zu externen Quellen. Nun ist das Internet eine äußerst schnellebige Angelegenheit und es kann sein, das ein Link nicht mehr funktioniert. In diesem Fall bitte ich um eine kurze Mail an mich: [joerg.hofmann@pecunia-non-olet.com](mailto:joerg.hofmann@pecunia-non-olet.com)
+1. In diesem Dokument finden sie viele Links zu externen Quellen. Nun ist das Internet eine äußerst schnellebige Angelegenheit und es kann sein, das ein Link nicht mehr funktioniert. In diesem Fall bitte ich um eine kurze Mail an mich: @mymail
 
 1. Ich verwende hier für Substantive und Pronomen durchgehend die weibliche Form, die natürlich alle Menschen einschließen soll.
 
 
 
-## Worum geht es: Die Aufgaben der Buchführung
+### Worum geht es: Die Aufgaben der Buchführung
 
 * Sie stellt den [**Stand des Vermögens und der Schulden**](#inventur-und-inventar) fest,
 * zeichnet [**alle Veränderungen**](#von-bilanz-zu-bilanz) von Vermögen und Schulden planmäßig auf,
@@ -36,7 +64,7 @@ Zum Schluß noch zwei Hinweise in eigener Sache:
 * ein wichtiges **Beweismittel** bei Rechtsstreitigkeiten.
 
 
-## Unsere Firma, die Rat-Pack-Sound-OHG
+### Unsere Firma, die Rat-Pack-Sound-OHG
 
 Auf der Suche nach einer seriösen Tätigkeit gründeten Frank S., Dean M.\ und Sammy D.\ die Rat-Pack-Sound-OHG. Die Firma hat sich auf die Fertigung hochwertiger HiFi-Verstärker spezialisiert und beliefert Einzelhändlerinnen im gesamten europäischen Raum. Um ihren Kundeninnen ein komplettes Angebot erstellen zu können, werden weitere Komponenten dazu gekauft. Die eigenen Erzeugnisse sind$(br)$(br)
 
@@ -45,7 +73,7 @@ Auf der Suche nach einer seriösen Tätigkeit gründeten Frank S., Dean M.\ und 
 * Verstärker "Chip"
 
 
-### Firmenangaben
+#### Firmenangaben
 |                          |                                 |
 |-------------------------:|:--------------------------------|
 |Firma:                    |$(Projekt.DieseFirma.name1)      |
@@ -72,19 +100,26 @@ Auf der Suche nach einer seriösen Tätigkeit gründeten Frank S., Dean M.\ und 
 |                          |                                 |
 |Art der Besteuerung:      |$(Projekt.DieseFirma.ustbesteuerung)|
 |                          |                                 |
-|Erstes Buchungsjahr:      |$(Jahr)                          |
+|Erstes Buchungsjahr:      |$(Projekt.jahr)                          |
 
 
 
 
 
-# Inventur und Inventar
+## Inventur und Inventar
 
-## Inventur
+* Inventur
+	+ Wert- und mengenmäßige Bestandsaufnahme
+	+ Inventurverfahren
+
+* Inventar: Aufbau und Gliederung
+
+
+### Inventur
 
 > Jeder Kaufmann hat zu Beginn seines Handelsgewerbes seine Grundstücke, seine Forderungen und Schulden, den Betrag seines baren Geldes sowie seine sonstigen Vermögensgegenstände genau zu verzeichnen und dabei den Wert der einzelnen Vermögensgegenstände und Schulden anzugeben.$(br)([§240, 1 HGB](https://www.gesetze-im-internet.de/hgb/__240.html))
 
-### Wert- und mengenmäßige Bestandsaufnahme
+#### Wert- und mengenmäßige Bestandsaufnahme
 
 Am Beginn jeder Buchhaltung steht also eine mengen- und wertmäßige Bestandsaufnahme **aller** Vermögensgegenstände und Schulden. Dies geschieht im Rahmen einer
 Inventur. Die Inventur ist eine körperliche Bestandsaufnahme, daß heißt eine Bestandsaufnahme durch **messen, zählen und wiegen**. Nur nichtkörperliche Vermögensgegenstände und die Schulden
@@ -97,7 +132,7 @@ Der Gesetzgeber schreibt eine solche Bestandsaufnahme
 * bei Auflösung oder Verkauf eines Unternehmens vor.
 
 
-### Inventurverfahren
+#### Inventurverfahren
 
 Die Inventur erfasst alle Bestände zu einem bestimmten Zeit**punkt** (Stichtag). Es werden folgende Verfahren unterschieden:
 
@@ -115,7 +150,7 @@ Die Inventur erfasst alle Bestände zu einem bestimmten Zeit**punkt** (Stichtag)
 	+ Die mengenmäßige Erfassung erfolgt in einem Zeitraum von drei Monaten vor und zwei Monaten nach dem Stichtag.
 	+ Die Inventur**werte**, ohne die Mengen, müssen dann auf den Stichtag fortgeschrieben bzw. zurückgerechnet werden.
 
-## Inventar: Aufbau und Gliederung
+### Inventar: Aufbau und Gliederung
 
 Hinweis: Dieses Kapitel ist für die Praxis nur von geringer Bedeutung. Inventare sind hier einfach Listen mit Inventurergebnissen, die, je nach Größe des Betriebes, mehr oder weniger umfangreich sein können. Es sind aber immer vollständige Listen *aller* Vermögensgegenstände und Schulden, die *einzeln* mit *Menge und Wert* verzeichnet sind. Die folgende Aufbereitung des Inventars steht vor allem in Lehrbüchern und hilft dabei, die Begriffe zu verdeutlichen.
 
@@ -138,18 +173,28 @@ Die *Schulden* werden nach ihrer Fälligkeit geordnet. Man unterscheidet lang- u
 
 Das *Reinvermögen* ist die Differenz aus Vermögen und Schulden. Es ist der wertmäßige Anteil der Inhaberin am Betriebsvermögen.
 
+### Alles klar? ;-)
+
+Wann ist eine Inventur durchzuführen?
+
+* [[x]] zu Beginn eines Handelsgewerbes
+* [[ ]] monatlich
+* [[x]] mind. einmal innerhalb von zwölf Monaten
+* [[ ]] jeweils zum 30.06. und 31.12. eines Kalenderjahres
+* [[x]] bei Auflösung oder Verkauf eines Unternehmens
 
 
 
-$(Aufgabe("2", "Inventur und Inventar", "inventar", "ag0001"))
+### Aufgabe: Inventur
+
+$(Aufgabe("4", "inventar", "ag0001"))
 
 
-
-# Die Bilanz
+## Die Bilanz
 
 > Der Kaufmann hat zu Beginn seines Handelsgewerbes und für den Schluss eines jeden Geschäftsjahrs einen das Verhältnis seines Vermögens und seiner Schulden darstellenden Abschluss (Eröffnungsbilanz, Bilanz) aufzustellen. Auf die Eröffnungsbilanz sind die für den Jahresabschluss geltenden Vorschriften entsprechend anzuwenden, soweit sie sich auf die Bilanz beziehen.$(br)([§242,1 HGB](https://www.gesetze-im-internet.de/hgb/__242.html))
 
-## Aufbau und Inhalt der Bilanz
+### Aufbau und Inhalt der Bilanz
 
 Im Gegensatz zum Inventar ist die Bilanz eine kurzgefasste, wertmäßige Aufstellung aller Vermögensgegenstände und Schulden. Die Bilanz zeigt in übersichtlicher Form, woher der Betrieb sein Kapital bekommen hat, und wie es verwendet wurde.
 
@@ -157,72 +202,50 @@ Auf der linken Seite, der *Aktivseite* steht das gesamte zum Betrieb gehörende 
 
 Es gelten immer die *Bilanzgleichungen*:$(br)
 $(br)
-\xmlprocessdata{}{
+
+$$
+\begin{align*}
+\textmd{Vermögen} &= \textmd{Kapital}\\
+\textmd{Vermögen} &= \textmd{Eigenkapital} + \textmd{Fremdkapital}\\
+\textmd{Eigenkapital} &= \textmd{Vermögen} - \textmd{Fremdkapital}
+\end{align*}
+$$
+
+$(ifpdf [[\\xmlprocessdata{}{
 <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
- <semantics>
-  <mtable>
-   <mtr>
-    <mtd columnalign="right">
-     <mtext>Vermögen</mtext>
-    </mtd>
-    <mtd>
-     <mtext>=</mtext>
-    </mtd>
-    <mtd columnalign="left">
-     <mtext>Kapital</mtext>
-    </mtd>
-    <mtd>
-     <mrow/>
-    </mtd>
-    <mtd>
-     <mrow/>
-    </mtd>
-   </mtr>
-   <mtr>
-    <mtd columnalign="right">
-     <mtext>Vermögen</mtext>
-    </mtd>
-    <mtd>
-     <mtext>=</mtext>
-    </mtd>
-    <mtd columnalign="left">
-     <mtext>Eigenkapital</mtext>
-    </mtd>
-    <mtd>
-     <mtext>+</mtext>
-    </mtd>
-    <mtd>
-     <mtext>Fremdkapital</mtext>
-    </mtd>
-   </mtr>
-   <mtr>
-    <mtd>
-     <mtext>Eigenkapital</mtext>
-    </mtd>
-    <mtd>
-     <mtext>=</mtext>
-    </mtd>
-    <mtd columnalign="left">
-     <mtext>Vermögen</mtext>
-    </mtd>
-    <mtd>
-     <mtext>-</mtext>
-    </mtd>
-    <mtd>
-     <mtext>Fremdkapital</mtext>
-    </mtd>
-   </mtr>
-  </mtable>
- </semantics>
+   <semantics>
+      <mtable>
+         <mtr>
+            <mtd columnalign="right"><mtext>Vermögen</mtext></mtd>
+            <mtd><mtext>=</mtext></mtd>
+            <mtd columnalign="left"><mtext>Kapital</mtext></mtd>
+            <mtd><mtext> </mtext></mtd>
+            <mtd><mtext> </mtext></mtd>
+         </mtr>
+         <mtr>
+            <mtd columnalign="right"><mtext>Vermögen</mtext></mtd>
+            <mtd><mtext>=</mtext></mtd>
+            <mtd columnalign="left"><mtext>Eigenkapital</mtext></mtd>
+            <mtd><mtext>+</mtext></mtd>
+            <mtd><mtext>Fremdkapital</mtext></mtd>
+         </mtr>
+         <mtr>
+            <mtd><mtext>Eigenkapital</mtext></mtd>
+            <mtd><mtext>=</mtext></mtd>
+            <mtd columnalign="left"><mtext>Vermögen</mtext></mtd>
+            <mtd><mtext>-</mtext></mtd>
+            <mtd><mtext>Fremdkapital</mtext></mtd>
+         </mtr>
+      </mtable>
+   </semantics>
 </math>
-}{}
-$(Aufgabe("2", "Bilanz", "bilanz", "ag0002"))
+]])
 
 
 
-# Von Bilanz zu Bilanz
+## Von Bilanz zu Bilanz
 
-## Wertveränderungen durch Geschäftsfälle
+### Wertveränderungen durch Geschäftsfälle
 
 Die Bilanz zeigt den Stand des Vermögens und der Schulden zu einem bestimmten Zeitpunkt, dem Bilanzstichtag. Jeder Geschäftsfall verändert nun diese Bestände, und da die Bilanz immer ausgeglichen sein muß, werden mindestens zwei Bilanzpositionen berührt.
 
@@ -237,7 +260,7 @@ ausgeglichen.
 
 <p><b>*** Bilanz ***</b></p>
 
-## Die Grundbuchungsfälle
+### Die Grundbuchungsfälle
 
 Es werden vier Grundtypen von Bilanzveränderungen (Grundbuchungsfälle)
 unterschieden:
@@ -271,7 +294,7 @@ Passivtausch
 
 
 
-## Auflösen der Bilanz in Konten
+### Auflösen der Bilanz in Konten
 
 Die Bilanz wird also mit jedem Geschäftsvorfall verändert, aber es ist natürlich nicht sinnvoll,
 jedesmal Inventur zu machen und eine neue Bilanz zu erstellen. Besser ist es, alle Geschäftsvorfälle
@@ -282,7 +305,7 @@ der Bilanz die Vermögens- und Kapital**bestände** ausgewiesen sind, heißen di
 der Bilanz werden sie in aktive und passive Bestandskonten unterteilt. Die Konten werden eröffnet, indem die entsprechende Bilanzposition
 als Anfangsbestand eingetragen wird.
 
-## Eigenschaften der Bestandskonten
+### Eigenschaften der Bestandskonten
 
 **Aktivkonten** nehmen die Positionen der Aktivseite auf. Anfangsbestand
 und alle Zugänge stehen im Soll, Abgänge und Endbestand im Haben.$(br)
@@ -295,7 +318,7 @@ im Haben. Die Bilanzgleichung gilt auch hier, für jede Buchung gilt,
 daß die Summe aller Soll-Buchungen gleich der Summe aller Haben-Buchungen
 sein muß.
 
-## Buchen auf Bestandskonten
+### Buchen auf Bestandskonten
 
 Alle Geschäftsfälle werden auf der Grundlage von Belegen erfaßt.
 Jeder Buchung muß demnach ein Beleg zugrunde liegen.$(br)$(br) 
@@ -338,7 +361,7 @@ Auf welchen Kontenseiten ist demnach zu buchen?
 Am Ende des Buchungszeitraums werden die **Salden** der Konten ermittelt. Dazu werden zunächst die Summen der beiden Kontenseiten ermittelt, der Saldo ist dann die Differenz der beiden Summen. Die größere Summe wird jetzt unter **beide** Seiten geschrieben und der Saldo auf der schwächeren Seite eingetragen. Wichtig, in einem Konto dürfen keine freien Zeilen erscheinen, daher muss die letzte 
 
 
-## Der Buchungssatz
+### Der Buchungssatz
 
 Der Buchungssatz beschreibt in eindeutiger Form, wie ein Geschäftsfall in die Konten eingetragen werden soll. In der einfachsten Form, mit genau zwei Konten, wird zuerst das Konto genannt, das auf seiner berührt wird, dann das Konto, das auf seiner Habenseite berührt wird und schließlich der Buchungsbetrag. Zwischen die beiden Konten wird das Wort **an** gesetzt.
 
@@ -354,7 +377,7 @@ Beispiel: Die offene Rechnung wird nun aus zwei Konten, der Volksbank und der Po
 *Verbindlichkiten* 5.500,00 **an** *Volksbank* 3.500,00 und *Postbank* 2.000,00
 
 
-## Eröffnungs- und Schlussbilanzkonto
+### Eröffnungs- und Schlussbilanzkonto
 
 Zur Eröffnung der Bestandskonten wurden bisher die Anfangsbestände aus der Bilanz auf den entsprechenden Seiten der Konten vorgetragen. Die widerspricht dem Prinzip der doppelten Buchhaltung, wonach alle Beträge zweimal aufgezeichnet werden, nämlich einmal auf der Sollseite, und einmal auf der Habenseite eines Kontos.
 
@@ -389,12 +412,12 @@ Passivkonto\ **an**\ Schlussbilanzkonto$(br)$(br)
 Das Schlussbilanzkonto stimmt **inhaltlich** mit der, aus den Inventurwerten
 erstellten, Schlussbilanz überein.
 
-## Übung
+### Übung
 
 
-# Buchen mit Erfolgskonten
+## Buchen mit Erfolgskonten
 
-## Erfolg und Eigenkapital
+### Erfolg und Eigenkapital
 
 Selbst wirtschaftliche Laien kennen das Hauptziel der (Betriebs)Wirtschaft, die Gewinnmaximierung. Aber was ist der Gewinn und woran erkenne ich, dass ich Gewinn gemacht habe? Die zweite Frage wird oft mit "am Bankkonto" beantwortet, was natürlich falsch ist. Ich meinen Kontostand ohne Probleme um, sagen wir, $(eur "100.000,00") erhöhen, indem ich einen Kredit über diesen Betrag aufnehme. Das würde niemand als Gewinn bezeichnen.
 
@@ -422,20 +445,23 @@ aufgenommen wurden. Folglich ist auch das Reinvermögen um diesen Betrag gestieg
 wurde diese Mehrung nicht durch den Betrieb erwirtschaftet. Während eines Geschäftsjahres
 vorgenommene Einlagen müssen also vom Reinvermögen abgezogen werden.
 
-Merke: Der Erfolg^[Erfolg klingt gut, kann aber auch negativ sein, dann heiß er *Verlust*.]
-ist die, durch den Betrieb verursachte, Änderung des Reinvermögens während eines Geschäftsjahres.
+Merke: Der Erfolg[^1] ist die, durch den Betrieb verursachte, Änderung des Reinvermögens während eines Geschäftsjahres.
 Da aber Entnahmen bzw. Einlagen durch die Inhaberin das Reinvermögen ebenfalls verändern, müssen
 sie entsprechend berücksichtigt werden.$(br)$(br)
 
+[^1]:Erfolg klingt gut, kann aber auch negativ sein, dann heiß er *Verlust*
+
+
 $(when (zielformat == 'html5') [[
-<table>
-   <colgroup><col style="width: 1em" /><col style="width: 20em" /><col style="text-align: right" /></colgroup>
-   <tr><td></td><td>Eigenkapital<sub>neu</sub></td><td>82.500,00 €</td></tr>
-   <tr><td>$-$ </td><td>Eigenkapital<sub>alt</sub></td><td>80.000,00 €</td></tr>
-   <tr><td>$+$ </td><td>Entnahmen</td><td>36.000,00 €</td></tr>
-   <tr><td>$-$ </td><td>Einlagen</td><td>28.500,00 €</td></tr>
-   <tr><td>$=$ </td><td>Erfolg</td><td>10.000,00 €</td></tr>
-</table>]])
+$$
+\begin{matrix}
+   & \text{Eigenkapital}_{\text{neu}} & 82.500,00\,€ \\
+ - & \text{Eigenkapital}_{\text{alt}} & 80.000,00\,€ \\
+ + & \text{Entnahmen} & 36.000,00\,€ \\
+ - & \text{Einlagen} & 28.500,00\,€ \\
+ = & \text{Erfolg} & 10.000,00\,€ \\
+\end{matrix}
+$$]])
 
 $(when (zielformat == "context") [[
 \setupTABLE[c][2][width=10em]

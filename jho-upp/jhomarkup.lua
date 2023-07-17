@@ -17,7 +17,7 @@ Autor['ort'] = 'Wiesbaden'
 Autor['tel'] = '+49 611 507411'
 Autor['mobil'] = '+49 176 27810343'
 Autor['fax'] = '+49 611 94939032'
-Autor['mail'] = 'joerg.hofmann@jho-home.de'
+Autor['mail'] = 'joerg.hofmann@pecunia-non-olet.com'
 Autor['name'] = Autor['vorname'] .. " " .. Autor['nachname']
 Autor['firma'] = "pecunia-non-olet.com"
 Autor['logo'] = 'ich-zeichnung.png'
@@ -135,22 +135,49 @@ function MainInit () --{**
 --
 if Projekt.autor then
     Autor = {}
-    Autor['nachname'] = Projekt.autor.nachname
-    Autor['vorname'] = Projekt.autor.vorname
-    Autor['nickname'] = Projekt.autor.nickname
-    Autor['strasse'] = Projekt.autor.strasse
-    Autor['plz'] = Projekt.autor.plz
-    Autor['ort'] = Projekt.autor.ort
-    Autor['tel'] = Projekt.autor.tel
-    Autor['mobil'] = Projekt.autor.mobil
-    Autor['fax'] = Projekt.autor.fax
-    Autor['mail'] = Projekt.autor.mail
-    Autor['name'] = Projekt.autor.vorname .. " " .. Projekt.autor.nachname
-    Autor['firma'] = Projekt.autor.firma
-    Autor['logo'] = Projekt.autor.logo
-    Autor['www'] =  Projekt.autor.www
+    if Projekt.autor.nachname then
+	Autor['nachname'] = Projekt.autor.nachname
+	Autor['name'] = Projekt.autor.nachname
+    end
+    if Projekt.autor.vorname then
+	Autor['vorname'] = Projekt.autor.vorname
+	Autor['name'] = Projekt.autor.vorname .. " " .. Projekt.autor.nachname
+    end
+    if Projekt.autor.nickname then
+	Autor['nickname'] = Projekt.autor.nickname
+    end
+    if Projekt.autor.strasse then
+	Autor['strasse'] = Projekt.autor.strasse
+    end
+    if Projekt.autor.plz then
+	Autor['plz'] = Projekt.autor.plz
+    end
+    if Projekt.autor.ort then
+	Autor['ort'] = Projekt.autor.ort
+    end
+    if Projekt.autor.tel then
+	Autor['tel'] = Projekt.autor.tel
+    end
+    if Projekt.autor.mobil then
+	Autor['mobil'] = Projekt.autor.mobil
+    end
+    if Projekt.autor.fax then
+	Autor['fax'] = Projekt.autor.fax
+    end
+    if Projekt.autor.mail then
+	Autor['mail'] = Projekt.autor.mail
+    end
+    if Projekt.autor.firma then
+	Autor['firma'] = Projekt.autor.firma
+    end
+    if Projekt.autor.logo then
+	Autor['logo'] = Projekt.autor.logo
+    end
+    if Projekt.autor.www then
+	Autor['www'] =  Projekt.autor.www
+    end
 end
-**}
+-- **}
 
 	
 end
@@ -162,13 +189,14 @@ function chapter (title, shorttitle, content) --{**
 	shorttitle = title
     end
 
-    if (target == "hugo" then
+    if (target == "hugo") then
 	returnStr = '---\ntitle: "' .. title .. '"\nmenutitle: "' .. shorttitle ..'"\n'
-    returnStr = returnStr .. 'chapter: true\nweight: ' .. hugoWeight .. '\n---\n\n'
-    returnStr = returnStr .. content
-datei = io.open(".txt", "a")
-datei:write("testnachricht")
-datei:close()
+        returnStr = returnStr .. 'chapter: true\nweight: ' .. hugoWeight .. '\n---\n\n'
+        returnStr = returnStr .. content
+    end
+    datei = io.open(".txt", "a")
+    datei:write("testnachricht")
+    datei:close()
     return returnStr
 
 end
@@ -250,6 +278,20 @@ end
 function ifpdf (content)
 
 	if (target == "pdf") then
+		return content
+	else
+		return ""
+	end
+end
+
+-- **}
+
+-- iflia ==================================================================================================== {**
+-- wird ausgeführt wenn target = liascript
+
+function ifhugo (content)
+
+	if (target == "liascript") then
 		return content
 	else
 		return ""
@@ -508,17 +550,21 @@ end
 -- AUFGABE ==================================================================================================== {**
 -- Fügt eine Aufgabe in den Text ein.
 -- 
-function Aufgabe (GlEbene, Titel, Datei, Yaml)
+function Aufgabe (GlEbene, Datei, Yaml)
 
     local ReturnStr = ""
+    local GlStr = ""
     require(Datei)
 
     InputData = LoadYaml(Yaml)
 
     -- Überschrift
-    ReturnStr = ReturnStr .. GlEbene .. " Übung: " .. Titel .. "\n\n"
+    
+    for i = 1, GlEbene, 1 do
+	GlStr = GlStr .. "#"
+    end
 
-    ReturnStr = ReturnStr .. main(GlEbene) 
+    ReturnStr = ReturnStr .. main(GlStr) 
 
     return ReturnStr
 
@@ -571,5 +617,7 @@ end
 -- **}
 --
 -- **}
+--
+MainInit()
 
 

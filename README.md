@@ -48,4 +48,6 @@ Das Skript soll das Erstellen von Präsentationen mit pandoc-markdown und *revea
 
 ## jho-liascript: LiaScript = erweitertes Markdown für Lehrmaterial
 
+LiaScript ist ein vielversprechender Ansatz, um Lern- und Lehrmaterial zu erstellen und(!) zu verteilen. LiaScript erwartet Markdown um Lernaktivitäten, Quizze, etc.
+
 

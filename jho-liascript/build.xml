@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="LiaScript" default="html">
+
+	<target name="prepare" unless="done">
+		<property environment="env" />
+		<delete includeemptydirs="true">
+		    <fileset dir = "0_TMP" includes = "**/*"/>
+		    <fileset dir = "0_OUT" includes = "**/*"/>
+		    <fileset dir = "0_HUGO/content" includes = "**/*"/>
+		    <fileset dir = "${env.local_www_dir}/${ant.project.name}" includes = "**/*"/>
+		</delete>
+	</target>
+
+	<target name="copy4pdf" unless="done">
+	    <copy todir="0_TMP" overwrite="true">
+			<fileset dir="bilder" includes="*.png" />
+			<fileset dir="bilder" includes="*.svg" />
+			<fileset dir="bilder" includes="*.gif" />
+			<fileset dir="bilder" includes="*.jpg" />
+			<fileset dir="bilder" includes="*.pdf" />
+			<fileset dir=".">
+			    <include name="*.lua" />
+			    <include name="*.yaml" />
+			    <include name="*.tex" />
+			    <include name="*.md" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="copy4lia" unless="done">
+	    <copy todir="0_LIA/images" overwrite="true">
+			<fileset dir="bilder" includes="*.png" />
+			<fileset dir="bilder" includes="*.svg" />
+			<fileset dir="bilder" includes="*.gif" />
+			<fileset dir="bilder" includes="*.jpg" />
+			<fileset dir="bilder" includes="*.pdf" />
+		</copy>
+	    <copy todir="0_LIA/scripts" overwrite="true">
+			<fileset dir="scripts" includes="*.js" />
+		</copy>
+	    <copy todir="0_LIA/css" overwrite="true">
+			<fileset dir="formate" includes="*.css" />
+		</copy>
+	</target>
+
+	<target name="lia" depends="prepare" unless="done">
+	    <antcall target="copy4lia" />
+	    <exec executable="upp" output="0_LIA/README.md" logError="true">
+		<arg line="-l liascript.lua muster.md" />
+	    </exec>
+	    <property name="done" value="done" />
+	</target>
+
+	<target name="make-pdf" unless="done">
+	    	<echo message="Target: make-pdf"/>
+	    	<echo message='Starte "upp" '/>
+		<exec executable="upp" dir="0_TMP" output="0_TMP/${ant.project.name}-tmp.md" logError="true">
+			<arg line="-l context.lua ${ant.project.name}.md" />
+		    </exec>
+		    <replace file="0_TMP/${ant.project.name}-tmp.md" token="![](/images/" value="![](" /> 
+
+	    	<echo message='Starte "pandoc" '/>
+		<exec executable="pandoc" dir="0_TMP/">
+			<arg line="${ant.project.name}-tmp.md -t context+ntb+raw_tex --template=jho -s -o ${ant.project.name}-tmp.tex" />
+		</exec>
+	    	<echo message='Starte "context" '/>
+		<exec executable="context" dir="0_TMP/">
+			<arg line="${ant.project.name}-tmp.tex --result=${ant.project.name}.pdf" />
+		</exec>
+	    </target>
+
+	    <target name="pdf" depends="prepare" unless="done">
+	    	<echo message="Target: pdf"/>
+	        <antcall target="copy4pdf" />
+		<antcall target="make-pdf" />
+		<move file="0_TMP/${ant.project.name}.pdf" tofile="0_OUT/${ant.project.name}.pdf" />
+		<property name="done" value="done" />
+	    </target>
+    
+</project>
