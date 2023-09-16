@@ -4,7 +4,7 @@
 
 	<target name="main" unless="done">
 		<echo message="Jetzt geht's los." />
-		<copy todir="${user.home}/.local/lib/upp">
+		<copy todir="${user.home}/.local/lib">
 			<fileset dir="." includes="*.lua" />
 		</copy>
 		<property name="done" value="done" />
