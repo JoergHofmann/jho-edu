@@ -11,7 +11,7 @@ Mein Ziel, das vielbeschworene Single-source-publishing, Skripte als PDF oder in
 
 * *Vim*, weil ich mir dazu zwei Bücher gekauft habe und diese Investition nicht einfach abschreiben möchte. ;-)
 
-* *upp*, ein einfacher Preprozessor, der mit Lua-Funktionen erweitert werden kann.
+* *ypp*, ein einfacher Preprozessor, der mit Lua-Funktionen erweitert werden kann.
 
 * *pandoc*
 
@@ -25,12 +25,13 @@ Mein Ziel, das vielbeschworene Single-source-publishing, Skripte als PDF oder in
 
 * *HUGO*
 
+# Module
 
-## jho-upp
+## jhomarkup
 
-Skripte für den [upp Preprozessor](https://github.com/CDSoft/upp) um Unterrichtsmaterial zu erstellen. Weitere Bearbeitung mit [Pandoc](https://pandoc.org/).
+Sammlung von Skripten für den [ypp Preprozessor](https://cdelord.fr/ypp.html) um Unterrichtsmaterial zu erstellen. Weitere Bearbeitung mit [Pandoc](https://pandoc.org/).
 
-## jho-praesentation: Präsentationen mit Markdown und UPP
+## jho-praesentation: Präsentationen mit Markdown und ypp
 
 ### Ziele
 Das Skript soll das Erstellen von Präsentationen mit pandoc-markdown und *reveal.js* erleichtern. Folgende "Modi" sind geplant:
@@ -41,12 +42,27 @@ Das Skript soll das Erstellen von Präsentationen mit pandoc-markdown und *revea
 
 * notes: Ausdruck für den Vortragenden mit Folien und Notizen.
 
+
+
 ## jho-js
 
 
+## jho-hugo
 
 
-## jho-liascript: LiaScript = erweitertes Markdown für Lehrmaterial
+
+## jho-svg
+
+
+
+## jho-html
+
+
+
+
+## jho-liascript
+
+LiaScript = erweitertes Markdown für Lehrmaterial
 
 LiaScript ist ein vielversprechender Ansatz, um Lern- und Lehrmaterial zu erstellen und(!) zu verteilen. LiaScript erwartet Markdown um Lernaktivitäten, Quizze, etc.
 
