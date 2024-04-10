@@ -1,0 +1,13 @@
+% ConTeXt-vorlage für Inventar;
+% mustache   
+\bTABLE
+   \tfxx
+   \setupTABLE[r][1][topframe=on,bottomframe=on]
+   \setupTABLE[c][2,3,4][align=flushright]
+   \setupTABLE[c][3,4][width=8em]
+   \bTR\bTH Bezeichung\eTH\bTH Menge\eTH\bTH Wert\eTH\bTH Gesamt\eTH\eTR
+   {{#inventar}}
+   \bTR\bTD {{Bezeichnung}}\eTD\bTD {{Menge}}\eTD\bTD {{Wert}}\eTD\bTD {{Gesamt}}\eTD\eTR
+   {{/inventar}}
+\eTABLE
+

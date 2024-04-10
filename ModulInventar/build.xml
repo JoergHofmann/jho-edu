@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="ModulInventar" default="html">
+
+    <!-- Liest ein Inventar aus einer yaml-Datei und
+    stellt es über Mustache in TeX und HTML dar. --> 
+
+    <target name="prepare" unless="done">
+	<property environment="env" />
+	<!-- <property name="ftp.server" value="www342.your-server.de" />
+	<property name="ftp.dir" value="public_html/pecunia-non-olet/Magazin"/> -->
+		<copy todir="0_TMP" >
+			<fileset dir="layouts/">
+				<include name="*.css" />
+			</fileset>
+			<fileset dir="scripts/">
+				<include name="*.js" />
+			</fileset>
+			<fileset dir=".">
+				<include name="*.lua" />
+				<include name="*.yaml" />
+				<include name="*.tex" />
+				<include name="*.html" />
+				<include name="*.md" />
+			</fileset>
+		</copy>
+    </target>
+
+    <target name="html" depends="prepare" unless="done">
+	<exec executable="ypp" output="0_TMP/${ant.project.name}.md" logError="true">
+	    <arg line="-l html5.lua ${ant.project.name}.md" />
+	</exec>
+	<exec executable="pandoc" dir="0_TMP/">
+	    <arg line="${ant.project.name}.md -t html --template=jho -c wiedereinstieg.css -H sort.js -s -o ${ant.project.name}.html" />
+	</exec>
+	<property name="done" value="done" />
+    </target>
+
+</project>

@@ -1,0 +1,140 @@
+   <section id="{{AgId}}" class="invListe">
+   <form id="f{{AgId}}" name="f{{AgId}}">
+   <div class="kopfzeile">
+   <span class="bezeichnung">Bezeichung</span>
+   <span class="menge">Menge</span>
+   <span class="zahlenspalte">Wert</span>
+   <span class="zahlenspalte">Gesamt</span>
+   </div>
+   <div id="{{AgId}}_liste" class="list-container">
+   </div>
+   <div class="fusszeile">
+   <button type="button" id="pruefen">Prüfen</button>
+   <button type="button" id="neu">Neu</button>
+   <span id="{{AgId}}_Auswertung" class="auswertung"></span>
+   </div>
+   </form>
+   <script src="scripts/Sortable.min.js"></script>
+   <script>
+   var {{AgId}}_inv_liste = new Array(),
+       h = '',
+       AgId = '{{AgId}}',
+       {{AgId}}_LSummeAV = {{SummeAV}},
+       {{AgId}}_LSummeUV = {{SummeUV}},
+       {{AgId}}_LSummeSchulden = {{SummeSchulden}},
+       {{AgId}}_LSummeVermoegen = {{SummeVermoegen}},
+       {{AgId}}_LReinvermoegen = {{Reinvermoegen}};
+
+
+       function pruefen (list) {
+		  let max = list.length - 1;
+		  let maxPunkte = max + 1 + 5;
+		  let erreichtePunkte = 0;
+		  if (list[0][1] == 1) {
+			     document.getElementById("{{AgId}}_kor0").innerHTML = richtig;
+			     erreichtePunkte++;
+			 } else {
+			     document.getElementById("{{AgId}}_kor0").innerHTML = falsch;
+					   }
+		  for (let i=1; i<=max; i++) {
+			     if (list[i-1][1] == list[i][1]) {
+					document.getElementById("{{AgId}}_kor"+i).innerHTML = richtig;
+					erreichtePunkte++;
+				    } else if (list[i-1][1] == list[i][1]-1) {
+					document.getElementById("{{AgId}}_kor"+i).innerHTML = richtig;
+					erreichtePunkte++;
+					       } else {
+							  document.getElementById("{{AgId}}_kor"+i).innerHTML = falsch;
+					   }
+			 }
+		  if (makeNumber(document.forms.f{{AgId}}.SummeAV.value) == {{AgId}}_LSummeAV) {
+			     document.forms.f{{AgId}}.SummeAV.classList.remove("falsch");
+			     document.forms.f{{AgId}}.SummeAV.classList.add("richtig");
+			     erreichtePunkte++;
+			 } else {
+				    document.forms.f{{AgId}}.SummeAV.classList.remove("richtig");
+				    document.forms.f{{AgId}}.SummeAV.classList.add("falsch");
+				}
+
+		  if (makeNumber(document.forms.f{{AgId}}.SummeUV.value) == {{AgId}}_LSummeUV) {
+			     document.forms.f{{AgId}}.SummeUV.classList.remove("falsch");
+			     document.forms.f{{AgId}}.SummeUV.classList.add("richtig");
+			     erreichtePunkte++;
+			 } else {
+				    document.forms.f{{AgId}}.SummeUV.classList.remove("richtig");
+				    document.forms.f{{AgId}}.SummeUV.classList.add("falsch");
+				}
+
+		  if (makeNumber(document.forms.f{{AgId}}.SummeVermoegen.value) == {{AgId}}_LSummeVermoegen) {
+			     document.forms.f{{AgId}}.SummeVermoegen.classList.remove("falsch");
+			     document.forms.f{{AgId}}.SummeVermoegen.classList.add("richtig");
+			     erreichtePunkte++;
+			 } else {
+				    document.forms.f{{AgId}}.SummeVermoegen.classList.remove("richtig");
+				    document.forms.f{{AgId}}.SummeVermoegen.classList.add("falsch");
+				}
+
+		  if (makeNumber(document.forms.f{{AgId}}.SummeSchulden.value) == {{AgId}}_LSummeSchulden) {
+			     document.forms.f{{AgId}}.SummeSchulden.classList.remove("falsch");
+			     document.forms.f{{AgId}}.SummeSchulden.classList.add("richtig");
+			     erreichtePunkte++;
+			 } else {
+				    document.forms.f{{AgId}}.SummeSchulden.classList.remove("richtig");
+				    document.forms.f{{AgId}}.SummeSchulden.classList.add("falsch");
+				}
+
+		  if (makeNumber(document.forms.f{{AgId}}.Reinvermoegen.value) == {{AgId}}_LReinvermoegen) {
+			     document.forms.f{{AgId}}.Reinvermoegen.classList.remove("falsch");
+			     document.forms.f{{AgId}}.Reinvermoegen.classList.add("richtig");
+			     erreichtePunkte++;
+			 } else {
+				    document.forms.f{{AgId}}.Reinvermoegen.classList.remove("richtig");
+				    document.forms.f{{AgId}}.Reinvermoegen.classList.add("falsch");
+				}
+		  document.getElementById("{{AgId}}_Auswertung").innerText = erreichtePunkte + " Punkte von " + maxPunkte + " Punkten" 
+
+	      }
+
+
+       {{AgId}}_inv_liste[0] = '<div id="{{AgId}}_inv0" data-rang="1" class="list-element" draggable = "true"><span class="bezeichnung">Vermögen</span><span class="menge"></span><span class="zahlenspalte"></span><span class="zahlenspalte"></span><span id="{{AgId}}_kor0" class="korrektur"></span></div>';
+   {{AgId}}_inv_liste[1] = '<div id="{{AgId}}_inv1" data-rang="2" class="list-element" draggable = "true"><span class="bezeichnung">Anlagevermögen</span><span class="menge"></span><span class="zahlenspalte"></span><span class="zahlenspalte"></span><span id="{{AgId}}_kor1" class="korrektur"></span></div>';
+   {{AgId}}_inv_liste[2] = '<div id="{{AgId}}_inv2" data-rang="{{RangHeaderUV}}" class="list-element" draggable = "true"><span class="bezeichnung">Umlaufvermögen</span><span class="menge"></span><span class="zahlenspalte"></span><span class="zahlenspalte"></span><span id="{{AgId}}_kor2" class="korrektur"></span></div>';
+   {{AgId}}_inv_liste[3] = '<div id="{{AgId}}_inv3" data-rang="{{RangHeaderSchulden}}" class="list-element" draggable = "true"><span class="bezeichnung">Schulden</span><span class="menge"></span><span class="zahlenspalte"></span><span class="zahlenspalte"></span><span id="{{AgId}}_kor3" class="korrektur"></span></div>';
+   {{AgId}}_inv_liste[4] = '<div id="{{AgId}}_inv4" data-rang="{{RangReinvermoegen}}" class="list-element" draggable = "true"><span class="bezeichnung">Reinvermögen</span><span class="menge"> </span><span class="zahlenspalte"> </span><span class="zahlenspalte"><input draggable="true" id="Reinvermoegen" name="Reinvermoegen" class="eingabe" type="text"/></span><span id="{{AgId}}_kor4" class="korrektur"></span></div>';
+   {{AgId}}_inv_liste[5] = '<div id="{{AgId}}_inv5" data-rang="{{RangSummeVermoegen}}" class="list-element" draggable = "true"><span class="bezeichnung">Summe Vermögen</span><span class="menge"> </span><span class="zahlenspalte"> </span><span class="zahlenspalte"><input draggable="true" id="SummeVermoegen" name="SummeVermoegen" class="eingabe" type="text"/></span><span id="{{AgId}}_kor5" class="korrektur"></span></div>';
+   {{AgId}}_inv_liste[6] = '<div id="{{AgId}}_inv6" data-rang="{{RangSummeAV}}" class="list-element" draggable = "true"><span class="bezeichnung">Summe Anlagevermögen</span><span class="menge"></span><span class="zahlenspalte"> </span><span class="zahlenspalte"><input draggable="true" id="SummeAV" name="SummeAV" class="eingabe" type="text"/></span><span id="{{AgId}}_kor6" class="korrektur"></span></div>';
+   {{AgId}}_inv_liste[7] = '<div id="{{AgId}}_inv7" data-rang="{{RangSummeUV}}" class="list-element" draggable = "true"><span class="bezeichnung">Summe Umlaufvermögen</span><span class="menge"> </span><span class="zahlenspalte"> </span><span class="zahlenspalte"><input draggable="true" id="SummeUV" name="SummeUV" class="eingabe" type="text"/></span><span id="{{AgId}}_kor7" class="korrektur"></span></div>';
+   {{AgId}}_inv_liste[8] = '<div id="{{AgId}}_inv8" data-rang="{{RangSummeSchulden}}" class="list-element" draggable = "true"><span class="bezeichnung">Summe Schulden</span><span class="menge"> </span><span class="zahlenspalte"> </span><span class="zahlenspalte"><input draggable="true" id="SummeSchulden" name="SummeSchulden" class="eingabe" type="text"/></span><span id="{{AgId}}_kor8" class="korrektur"></span></div>';
+{{#inventar}}
+{{AgId}}_inv_liste[{{Index}}] = '<div id="{{AgId}}_inv{{Index}}" data-rang="{{Rang}}" class="list-element" draggable = "true">' +
+                         '<span class="bezeichnung">{{Bezeichnung}}</span>' +
+                         '<span class="menge">{{Menge}}</span>' + 
+                         '<span class="zahlenspalte">{{Wert}}</span>' +
+			 '<span class="zahlenspalte">{{Gesamt}}</span>' +
+	   '<span id="{{AgId}}_kor{{Index}}" class="korrektur"></span>' +
+			 '</div>';
+   {{/inventar}}
+   InventarNeu('{{AgId}}', {{AgId}}_inv_liste);
+   {{AgId}}MaxElemente = {{AgId}}_inv_liste.length -1;
+   ThisForm = document.forms['f{{AgId}}'];
+   let newOrder = [];
+   const {{AgId}}_inventar = document.querySelector('#{{AgId}}_liste');
+   const {{AgId}}_sortable = Sortable.create({{AgId}}_inventar, {
+	      animation: 150,
+	      onUpdate: function (evt) {
+			 newOrder = [];
+			 evt.to.childNodes.forEach({{AgId}}_inventar => {
+				    newOrder.push([{{AgId}}_inventar.id, {{AgId}}_inventar.dataset.rang]);
+				});
+		     },
+	  });
+
+   ThisForm.elements['Reinvermoegen'].addEventListener('blur', FormatiereZahl);
+   ThisForm.elements['SummeAV'].addEventListener('blur', FormatiereZahl);
+   ThisForm.elements['SummeUV'].addEventListener('blur', FormatiereZahl);
+   ThisForm.elements['SummeVermoegen'].addEventListener('blur', FormatiereZahl);
+   ThisForm.elements['SummeSchulden'].addEventListener('blur', FormatiereZahl);
+   ThisForm.elements['neu'].addEventListener('click', function() { InventarNeu('{{AgId}}', {{AgId}}_inv_liste)});
+       ThisForm.elements['pruefen'].addEventListener('click', function() { pruefen(newOrder)});
+   </script>
+   </section>

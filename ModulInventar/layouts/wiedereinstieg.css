@@ -1,0 +1,229 @@
+* {
+   margin: 0;
+   padding: 0;
+   border: 0;
+   }
+
+/* HTML-Elemente */
+
+body {
+	background-color: #e6e6e6;
+	font-size:1.2em;
+	font-family:serif;
+	margin-left: 4rem;
+	margin-right: 4rem;
+        margin-bottom: 1rem;
+   }
+
+header {
+   width: 100%;
+   background-color: lightblue;
+   }
+
+footer {
+    margin-top: 2rem;
+    border-top: 2px solid black;
+    font-size: 0.7em;
+}
+
+nav {
+   float : left ;
+   padding : 0.2 em ;
+   margin : 0.5 em ;
+   border : 1 px dotted gray ;
+   font - size : 80%;
+   background-color: yellow;
+   }
+
+table {
+   border-collapse: collapse;
+   }
+
+h1 {margin-top: 8ex;
+   }
+
+h1:first-child {
+   margin-top: 2ex;
+   }
+
+h2 {margin-top: 6ex;
+   }
+
+h3 {
+   margin-top: 3ex;
+   }
+
+/* h4 {
+   }*/
+
+/* h5 {
+   }*/
+
+/* h6 {
+   }*/
+
+ul, ol {
+   list-style-position: outside;
+   padding-left: 3em;
+   padding-right: 5em;
+   }
+
+p {
+   width: 90%;
+   margin-top: 1ex;
+   }
+
+blockquote {
+   padding-left: 5em;
+   padding-right: 5em;
+   }
+
+dt {
+   margin-top: 2em;
+   font-weight: bold;
+   }
+
+/*########### ID #############################*/
+
+/*##### Klassen ##############################*/
+
+.inventurliste {
+   margin: 2em;
+   padding: 1em;
+   padding-left: 3em;
+   padding-right: 3em;
+   border: 2px solid blue;
+   background-color: lightblue;
+   }
+
+.title {
+   margin-top: 2ex;
+   }
+
+.TC {
+   width: 2px;
+   background-color: black;
+   }
+
+.list-element {
+   color: white;
+   background-color: blue;
+   margin-top: 0.5em;
+   margin-bottom: 0.5em;
+   padding-left: 0.5em;
+   padding-right: 0.5em;
+   line-height: 2;
+   cursor: move;
+   }
+
+.list-element.sortable-ghost {
+   background-color: lightblue;
+   }
+
+.kopfzeile {
+   margin: 0em;
+   margin-top: 0.5em;
+   margin-bottom: 0.5em;
+   padding: 1em;
+   padding-top: 0.5em;
+   padding-bottom: 0.5em;
+   border: 2px solid blue;
+   background-color: lightblue;
+   }
+
+.fusszeile {
+   margin: 0em;
+   margin-top: 0.5em;
+   padding: 1em;
+   padding-top: 0.5em;
+   padding-bottom: 0.5em;
+   border: 2px solid blue;
+   background-color: lightblue;
+   }
+
+.bezeichnung {
+   display: inline-block;
+   min-width: 30em;
+   }
+
+.menge {
+   display: inline-block;
+   min-width: 4em;
+   text-align: right;
+   }
+
+.korrektur {
+   display: inline-block;
+   min-width: 4em;
+   text-align: right;
+   }
+
+.zahlenspalte {
+   display: inline-block;
+   min-width: 12em;
+   text-align: right;
+   }
+
+.eingabe {
+   width: 10em;
+   text-align: right;
+   }
+
+.auswertung {
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+    }
+
+.falsch {
+   background-color: red;
+   }
+
+.richtig {
+   background-color: green;
+   }
+
+   /* ================== Allgemeine Formatierungen, später in eigene Datei */
+.tabHL {
+	height: 3px;
+	background-color: black;
+}	
+
+.tabVL {
+	width: 3px;
+	background-color: black;
+}
+
+.ktoText {
+	width:15rem;
+	padding-left: 5px;
+	overflow: hidden;
+}
+
+.ktoMitte {
+	width:10rem;
+	overflow: hidden;
+}
+
+.ktoZahl {
+	width:15rem;
+	text-align: right;
+	padding-right: 5px;
+	overflow: hidden;
+}
+
+.ktoSumme {
+	width:15rem;
+	text-align: right;
+	padding-right: 5px;
+	font-weight: bold;
+	overflow: hidden;
+}
+
+.konto {
+	border-collapse: collapse;
+	border-spacing: 0 0;
+	table-layout: fixed;
+	overflow: hidden;
+}
+

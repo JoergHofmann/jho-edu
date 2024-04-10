@@ -1,0 +1,167 @@
+/*########### HTML-Elemente #############################*/
+ul, ol {
+   list-style-position: outside;
+   padding-left: 3em;
+   padding-right: 5em;
+   }
+
+p {
+   width: 90%;
+   margin-top: 1ex;
+   }
+
+blockquote {
+   padding-left: 5em;
+   padding-right: 5em;
+   }
+
+dt {
+   margin-top: 2em;
+   font-weight: bold;
+   }
+
+/*########### ID #############################*/
+
+/*##### Klassen ##############################*/
+
+.aufgabe
+.inventurliste {
+   margin: 2em;
+   padding: 1em;
+   padding-left: 3em;
+   padding-right: 3em;
+   border: 2px solid blue;
+   background-color: lightblue;
+   }
+
+.title {
+   margin-top: 2ex;
+   }
+
+.TC {
+   width: 2px;
+   background-color: black;
+   }
+
+.list-element {
+   color: white;
+   background-color: blue;
+   margin-top: 0.5em;
+   margin-bottom: 0.5em;
+   padding-left: 0.5em;
+   padding-right: 0.5em;
+   line-height: 2;
+   cursor: move;
+   }
+
+.list-element.sortable-ghost {
+   background-color: lightblue;
+   }
+
+.kopfzeile {
+   margin: 0em;
+   margin-top: 0.5em;
+   margin-bottom: 0.5em;
+   padding: 1em;
+   padding-top: 0.5em;
+   padding-bottom: 0.5em;
+   border: 2px solid blue;
+   background-color: lightblue;
+   }
+
+.fusszeile {
+   margin: 0em;
+   margin-top: 0.5em;
+   padding: 1em;
+   padding-top: 0.5em;
+   padding-bottom: 0.5em;
+   border: 2px solid blue;
+   background-color: lightblue;
+   }
+
+.bezeichnung {
+   display: inline-block;
+   min-width: 30em;
+   }
+
+.menge {
+   display: inline-block;
+   min-width: 4em;
+   text-align: right;
+   }
+
+.korrektur {
+   display: inline-block;
+   min-width: 4em;
+   text-align: right;
+   }
+
+.zahlenspalte {
+   display: inline-block;
+   min-width: 12em;
+   text-align: right;
+   }
+
+.eingabe {
+   width: 10em;
+   text-align: right;
+   }
+
+.auswertung {
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+    }
+
+.falsch {
+   background-color: red;
+   }
+
+.richtig {
+   background-color: green;
+   }
+
+   /* ================== Allgemeine Formatierungen, später in eigene Datei */
+.tabHL {
+	height: 3px;
+	background-color: black;
+}	
+
+.tabVL {
+	width: 3px;
+	background-color: black;
+}
+
+.ktoText {
+	width:15rem;
+	padding-left: 5px;
+	overflow: hidden;
+}
+
+.ktoMitte {
+	width:10rem;
+	overflow: hidden;
+}
+
+.ktoZahl {
+	width:15rem;
+	text-align: right;
+	padding-right: 5px;
+	overflow: hidden;
+}
+
+.ktoSumme {
+	width:15rem;
+	text-align: right;
+	padding-right: 5px;
+	font-weight: bold;
+	overflow: hidden;
+}
+
+.konto {
+	border-collapse: collapse;
+	border-spacing: 0 0;
+	table-layout: fixed;
+	overflow: hidden;
+}
+
